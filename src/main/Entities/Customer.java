@@ -1,11 +1,13 @@
 package main.Entities;
 
 import main.Storage;
+import main.utils.SQLConnector;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Customer {
+    private int _id;
     private String _firstName;
     private String _lastName;
     private int _phoneNumber;
@@ -43,6 +45,7 @@ public class Customer {
 
     public void setBalance(float _balance) {
         this._balance = _balance;
+        SQLConnector.execute(String.format("UPDATE customers SET balance='%d' WHERE firstName='%s' AND lastName='%s'", (int)_balance, _firstName, _lastName));
     }
 
     public int getPhoneNumber() {
@@ -56,7 +59,6 @@ public class Customer {
     public String getFirstName() {
         return _firstName;
     }
-
 
     public static Customer FromHashCode(int hashCode){
         return Storage.instance.getCustomerManager().getCustomers().stream().filter(x -> x.hashCode() == hashCode).collect(Collectors.toList()).get(0);

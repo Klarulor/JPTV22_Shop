@@ -33,7 +33,7 @@ public class CustomerInteraction {
     }
     public static void increaseBalance(Scanner sc){
         CustomerInteraction.putCustomerList(sc);
-        int customerId = ScannerUtils.integerInput("Выберите нужный номер клиента")-1;
+        int customerId = ScannerUtils.integerInput("Выберите нужный номер клиента: ")-1;
         List<Customer> customers = Storage.instance.getCustomerManager().getCustomers();
         if(customerId < 0 || customerId >= customers.size()){
             System.out.println("Неправильный клиент");

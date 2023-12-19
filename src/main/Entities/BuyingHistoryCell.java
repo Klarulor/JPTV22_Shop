@@ -5,6 +5,7 @@ import sun.util.resources.cldr.ti.CurrencyNames_ti;
 import java.util.Objects;
 
 public class BuyingHistoryCell {
+    private int _id;
     private int _customerHasCode;
     private int _productHasCode;
     private float _totalPrice;
@@ -46,5 +47,11 @@ public class BuyingHistoryCell {
         return Objects.hash(_customerHasCode, _productHasCode, _totalPrice, _timestamp);
     }
 
+    public int get_id() {
+        return _id;
+    }
 
+    public void set_id(int _id) {
+        this._id = _id;
+    }
 }
