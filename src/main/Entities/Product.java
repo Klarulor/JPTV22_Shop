@@ -1,6 +1,7 @@
 package main.Entities;
 
 import main.Storage;
+import main.utils.SQLConnector;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(_displayName, _internalCode);
+        return Objects.hash(_internalCode);
     }
 
     @Override
@@ -64,5 +65,10 @@ public class Product {
 
     public static Product FromHashCode(int hashCode){
         return Storage.instance.getProductManager().getProducts().stream().filter(x -> x.hashCode() == hashCode).collect(Collectors.toList()).get(0);
+    }
+
+    public void ChangeDisplayName(String newDisplayName){
+        _displayName = newDisplayName;
+        SQLConnector.execute(String.format("UPDATE products SET displayName='%s' WHERE internalCode='%s'", newDisplayName, _internalCode));
     }
 }

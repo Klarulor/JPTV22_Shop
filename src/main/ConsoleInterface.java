@@ -24,8 +24,12 @@ public class ConsoleInterface {
                     "8 - Добавить денег покупателю\n" +
                     "9 - Рейтинг покупателе по количеству покупок\n" +
                     "10 - Рейтинг продаваемости товаров\n" +
+                    "11 - Сменить название товара\n" +
+                    "12 - Сменить номер телефона клиента\n" +
                     "Выберите номер действия: ");
             int num = sc.nextInt();
+            if(!ScannerUtils.booleanInput("Продолжить работу в задаче номер "+num+" (y/n)?"))
+                continue;
             switch (num){
                 case 1:
                     isRunning = false;
@@ -57,6 +61,11 @@ public class ConsoleInterface {
                     break;
                 case 10:
                     ShopInteractions.putProductBuyingRank(sc);
+                    break;
+                case 11:
+                    ProductInteraction.changeDisplayName(sc);
+                case 12:
+                    CustomerInteraction.changePhoneNumber(sc);
                     break;
                 default:
                     System.out.println("Неправильный ввод номера");

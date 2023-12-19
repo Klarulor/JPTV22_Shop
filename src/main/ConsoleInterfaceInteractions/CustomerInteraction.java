@@ -46,4 +46,11 @@ public class CustomerInteraction {
         customer.setBalance(customer.getBalance()+additional);
         System.out.println("Текущий баланс составляет $"+customer.getBalance());
     }
+    public static void changePhoneNumber(Scanner sc){
+        putCustomerList(sc);
+        int id = ScannerUtils.integerInput("Выберите номер клиента: ") -1;
+        Customer customer = Storage.instance.getCustomerManager().getCustomers().get(id);
+        int phone = ScannerUtils.integerInput("Новый номер телефона: ");
+        customer.updatePhoneNumber(phone);
+    }
 }

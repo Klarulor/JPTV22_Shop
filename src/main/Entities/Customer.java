@@ -26,12 +26,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return _phoneNumber == customer._phoneNumber && Objects.equals(_firstName, customer._firstName) && Objects.equals(_lastName, customer._lastName);
+        return Objects.equals(_firstName, customer._firstName) && Objects.equals(_lastName, customer._lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_firstName, _lastName, _phoneNumber);
+        return Objects.hash(_firstName, _lastName);
     }
 
     @Override
@@ -62,5 +62,10 @@ public class Customer {
 
     public static Customer FromHashCode(int hashCode){
         return Storage.instance.getCustomerManager().getCustomers().stream().filter(x -> x.hashCode() == hashCode).collect(Collectors.toList()).get(0);
+    }
+
+    public void updatePhoneNumber(int num){
+        _phoneNumber = num;
+        SQLConnector.execute(String.format("UPDATE customers SET phoneNumber='%d' WHERE firstName='%s' AND lastName='%s'", _phoneNumber, _firstName, _lastName));
     }
 }
