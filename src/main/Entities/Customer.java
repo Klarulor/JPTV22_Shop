@@ -61,7 +61,15 @@ public class Customer {
     }
 
     public static Customer FromHashCode(int hashCode){
-        return Storage.instance.getCustomerManager().getCustomers().stream().filter(x -> x.hashCode() == hashCode).collect(Collectors.toList()).get(0);
+        try{
+            return Storage.instance.getCustomerManager().getCustomers().stream().filter(x ->{
+
+                return  x.hashCode() == hashCode;
+
+
+            }).collect(Collectors.toList()).get(0);
+        }catch(Exception er){}
+        return null;
     }
 
     public void updatePhoneNumber(int num){
